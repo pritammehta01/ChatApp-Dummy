@@ -15,7 +15,7 @@ class CallScreen extends StatelessWidget {
             contentPadding: EdgeInsets.all(16),
             leading: CircleAvatar(
               radius: 35,
-              backgroundColor: Colors.teal[800],
+              backgroundColor: Colors.teal,
               child: Icon(
                 CupertinoIcons.link,
                 color: context.canvasColor,

@@ -4,7 +4,6 @@ import 'package:chat/model/calls_page.dart';
 import 'package:chat/model/chat_page.dart';
 import 'package:chat/model/group_page.dart';
 import 'package:chat/model/status_page.dart';
-import 'package:chat/modules/appbar.dart';
 import 'package:chat/modules/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,7 +46,7 @@ class _ChatState extends State<Chat> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.teal[800],
+          backgroundColor: Colors.teal,
           title: Text(
             "ChatApp",
           ),
