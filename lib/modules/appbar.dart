@@ -1,4 +1,4 @@
-import 'package:chat/model/profile_page.dart';
+import 'package:chat/modules/profile_page.dart';
 import 'package:chat/modules/settings_page.dart';
 import 'package:flutter/material.dart';
 

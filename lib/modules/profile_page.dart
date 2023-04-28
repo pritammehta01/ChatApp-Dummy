@@ -1,3 +1,4 @@
+import 'package:chat/model/profile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -16,7 +17,9 @@ class ProfilePage extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              print("Profile cliced");
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) => ProfileImagePickerBottomSheet());
             },
             child: Container(
               height: 150,
@@ -35,9 +38,6 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           Card(
-            // shape: RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            elevation: 0,
             child: ListTile(
               leading: Icon(
                 Icons.person,
