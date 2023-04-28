@@ -23,8 +23,7 @@ class SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Image.network(
-              "https://freepngimg.com/thumb/whatsapp/76995-whatsapp-message-android-internet-free-clipart-hq-thumb.png"),
+          child: Image.asset("assets/images/3rd.png"),
         ),
       ),
     );

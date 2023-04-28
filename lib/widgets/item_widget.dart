@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ItemWidget extends StatelessWidget {
-  final Component component;
+  final Component item;
 
-  const ItemWidget({super.key, required this.component});
+  const ItemWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(component.url),
+        backgroundImage: NetworkImage(item.url),
       ),
-      title: component.name.text.bold.size(18).make().py(4),
-      subtitle: component.message.text.bold.make().py(4),
-      trailing: component.date.text.make(),
+      title: item.name.text.bold.size(18).make().py(4),
+      subtitle: item.message.text.bold.make().py(4),
+      trailing: item.date.text.make(),
     );
   }
 }

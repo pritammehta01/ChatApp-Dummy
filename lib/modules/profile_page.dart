@@ -1,10 +1,17 @@
-import 'package:chat/model/profile_image.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String SelectedImagePath = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,23 +24,26 @@ class ProfilePage extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) => ProfileImagePickerBottomSheet());
+              ProfileImage();
             },
             child: Container(
               height: 150,
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://www.shutterstock.com/image-vector/human-icon-people-picture-profile-260nw-1012771615.jpg"),
+              child: ClipOval(
                 child: CircleAvatar(
-                  radius: 26,
-                  backgroundColor: Colors.teal,
-                  child: Icon(
-                    Icons.camera_alt_rounded,
-                    color: context.canvasColor,
-                  ),
-                ).pOnly(top: 90, left: 100),
+                  radius: 75,
+                  backgroundImage: SelectedImagePath == ""
+                      ? NetworkImage(
+                          "https://www.shutterstock.com/image-vector/human-icon-people-picture-profile-260nw-1012771615.jpg")
+                      : FileImage(File(SelectedImagePath)) as ImageProvider,
+                  child: CircleAvatar(
+                    radius: 26,
+                    backgroundColor: Colors.teal,
+                    child: Icon(
+                      Icons.camera_alt_rounded,
+                      color: context.canvasColor,
+                    ),
+                  ).pOnly(top: 90, left: 100),
+                ),
               ),
             ),
           ),
@@ -85,5 +95,70 @@ class ProfilePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> ProfileImage() async {
+    await showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 100.0,
+            child: ListView(children: [
+              "Choose Profile Image"
+                  .text
+                  .xl
+                  .bold
+                  .make()
+                  .pOnly(left: 100, top: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton.icon(
+                      onPressed: () async {
+                        String? imagePath = await selectImagefromCamera();
+                        if (imagePath != null) {
+                          setState(() {
+                            SelectedImagePath = imagePath;
+                          });
+                        }
+                      },
+                      icon: Icon(Icons.camera_alt_outlined),
+                      label: "Camera".text.make()),
+                  TextButton.icon(
+                      onPressed: () async {
+                        String? imagePath = await selectImagefromGallary();
+                        if (imagePath != null) {
+                          setState(() {
+                            SelectedImagePath = imagePath;
+                          });
+                        }
+                      },
+                      icon: Icon(Icons.image_outlined),
+                      label: "Gallery".text.make()),
+                ],
+              )
+            ]),
+          );
+        });
+  }
+
+  selectImagefromGallary() async {
+    XFile? file = await ImagePicker()
+        .pickImage(source: ImageSource.gallery, imageQuality: 10);
+    if (file != null) {
+      return file.path;
+    } else {
+      return "";
+    }
+  }
+
+  selectImagefromCamera() async {
+    XFile? file = await ImagePicker()
+        .pickImage(source: ImageSource.camera, imageQuality: 10);
+    if (file != null) {
+      return file.path;
+    } else {
+      return "";
+    }
   }
 }

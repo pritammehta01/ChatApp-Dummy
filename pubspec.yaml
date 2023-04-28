@@ -38,6 +38,8 @@ dependencies:
   velocity_x: ^3.6.0
   font_awesome_flutter: ^10.4.0
   image_picker: ^0.8.7+4
+  keyboard_attachable: ^2.1.0
+  flutter_keyboard_visibility: ^5.0.0
   
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:chat/widgets/chat_detait_page.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../widgets/item_widget.dart';
@@ -13,9 +14,14 @@ class ChatScreen extends StatelessWidget {
         shrinkWrap: true,
         itemCount: ItemModel.items.length,
         itemBuilder: (context, index) {
-          // final count = ItemModel.items[index];
+          final item = ItemModel.items[index];
           return ItemModel.items != null && ItemModel.items.isNotEmpty
-              ? ItemWidget(component: ItemModel.items[index])
+              ? InkWell(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChatDetailPage(item: item))),
+                  child: ItemWidget(item: item))
               : CircularProgressIndicator().centered();
         },
       ),
