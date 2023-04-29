@@ -4,10 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:keyboard_attachable/keyboard_attachable.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ChatDetailPage extends StatelessWidget {
+class ChatDetailPage extends StatefulWidget {
   final Component item;
 
   const ChatDetailPage({Key? key, required this.item}) : super(key: key);
+
+  @override
+  State<ChatDetailPage> createState() => _ChatDetailPageState();
+}
+
+class _ChatDetailPageState extends State<ChatDetailPage> {
+  TextEditingController _controller = TextEditingController();
+  bool _textFieldHasContent = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_onTextFieldChanged);
+  }
+
+  void _onTextFieldChanged() {
+    setState(() {
+      _textFieldHasContent = _controller.text.isNotEmpty;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +39,11 @@ class ChatDetailPage extends StatelessWidget {
         title: ListTile(
           contentPadding: EdgeInsets.zero,
           leading: CircleAvatar(
-            backgroundImage: NetworkImage(item.url),
+            backgroundImage: NetworkImage(widget.item.url),
           ),
-          title: Text(item.name),
+          title: Text(widget.item.name),
           //  item.name.text.bold.size(14).make().py(4),
-          subtitle: item.date.text.make(),
+          subtitle: widget.item.date.text.make(),
         ),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.videocam)),
@@ -42,6 +62,7 @@ class ChatDetailPage extends StatelessWidget {
                       child: Stack(
                         children: [
                           TextField(
+                            controller: _controller,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),
@@ -76,7 +97,9 @@ class ChatDetailPage extends StatelessWidget {
                       onPressed: () {},
                       icon: CircleAvatar(
                         backgroundColor: Colors.teal,
-                        child: Icon(CupertinoIcons.mic_fill),
+                        child: _textFieldHasContent
+                            ? Icon(Icons.send)
+                            : Icon(CupertinoIcons.mic_fill),
                       ),
                     )
                   ],

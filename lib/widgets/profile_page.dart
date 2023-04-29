@@ -4,14 +4,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({Key? key}) : super(key: key);
+
+  static String selectedImagePath = ""; // Declare static variable here
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String SelectedImagePath = "";
+  String ImagePath = ProfilePage.selectedImagePath;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +32,10 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 150,
               child: ClipOval(
                 child: CircleAvatar(
-                  radius: 75,
-                  backgroundImage: SelectedImagePath == ""
-                      ? NetworkImage(
-                          "https://www.shutterstock.com/image-vector/human-icon-people-picture-profile-260nw-1012771615.jpg")
-                      : FileImage(File(SelectedImagePath)) as ImageProvider,
+                  radius: 65,
+                  backgroundImage: ImagePath == ""
+                      ? AssetImage("assets/images/profile1.webp")
+                      : FileImage(File(ImagePath)) as ImageProvider,
                   child: CircleAvatar(
                     radius: 26,
                     backgroundColor: Colors.teal,
@@ -118,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         String? imagePath = await selectImagefromCamera();
                         if (imagePath != null) {
                           setState(() {
-                            SelectedImagePath = imagePath;
+                            ProfilePage.selectedImagePath = imagePath;
                           });
                         }
                       },
@@ -129,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         String? imagePath = await selectImagefromGallary();
                         if (imagePath != null) {
                           setState(() {
-                            SelectedImagePath = imagePath;
+                            ProfilePage.selectedImagePath = imagePath;
                           });
                         }
                       },

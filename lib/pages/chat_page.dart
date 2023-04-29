@@ -1,7 +1,7 @@
-import 'package:chat/widgets/chat_detait_page.dart';
+import 'package:chat/pages/chat_detait_page.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
-import '../widgets/item_widget.dart';
+import '../materials/item_widget.dart';
 import '../materials/item.dart';
 
 class ChatScreen extends StatelessWidget {

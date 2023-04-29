@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chat/modules/home_page.dart';
+import 'package:chat/widgets/home_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Chat()));
+          context, MaterialPageRoute(builder: (context) => HomePage()));
     });
     super.initState();
   }

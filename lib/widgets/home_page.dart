@@ -1,21 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:chat/model/calls_page.dart';
-import 'package:chat/model/chat_page.dart';
-import 'package:chat/model/group_page.dart';
-import 'package:chat/model/status_page.dart';
-import 'package:chat/modules/settings_page.dart';
+import 'package:chat/pages/calls_page.dart';
+import 'package:chat/pages/chat_page.dart';
+import 'package:chat/pages/group_page.dart';
+import 'package:chat/pages/status_page.dart';
+import 'package:chat/widgets/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import '../materials/item.dart';
 
-class Chat extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  State<Chat> createState() => _ChatState();
+  State<HomePage> createState() => _HomePage();
 }
 
-class _ChatState extends State<Chat> {
+class _HomePage extends State<HomePage> {
   @override
   void initState() {
     super.initState();
