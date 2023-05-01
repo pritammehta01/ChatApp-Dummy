@@ -13,6 +13,13 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  @override
+  void initState() {
+    super.initState();
+    ProfileImage();
+    setState(() {});
+  }
+
   String ImagePath = ProfilePage.selectedImagePath;
   @override
   Widget build(BuildContext context) {
@@ -116,23 +123,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   TextButton.icon(
                       onPressed: () async {
-                        String? imagePath = await selectImagefromCamera();
-                        if (imagePath != null) {
-                          setState(() {
-                            ProfilePage.selectedImagePath = imagePath;
-                          });
-                        }
+                        ImagePath = await selectImagefromCamera();
+
+                        setState(() {
+                          ProfilePage.selectedImagePath = ImagePath;
+                        });
+
+                        Navigator.pop(context);
                       },
                       icon: Icon(Icons.camera_alt_outlined),
                       label: "Camera".text.make()),
                   TextButton.icon(
                       onPressed: () async {
-                        String? imagePath = await selectImagefromGallary();
-                        if (imagePath != null) {
-                          setState(() {
-                            ProfilePage.selectedImagePath = imagePath;
-                          });
-                        }
+                        ImagePath = await selectImagefromGallary();
+
+                        setState(() {
+                          ProfilePage.selectedImagePath = ImagePath;
+                        });
+
+                        Navigator.pop(context);
                       },
                       icon: Icon(Icons.image_outlined),
                       label: "Gallery".text.make()),
@@ -161,5 +170,9 @@ class _ProfilePageState extends State<ProfilePage> {
     } else {
       return "";
     }
+  }
+
+  void onImageSelected(String imagePath) {
+    Navigator.pop(context, imagePath);
   }
 }
