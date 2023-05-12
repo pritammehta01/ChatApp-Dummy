@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Settings extends StatelessWidget {
-  String imagePath = ProfilePage.selectedImagePath;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +24,6 @@ class Settings extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: CircleAvatar(
                   radius: 38.0,
-                  backgroundImage: imagePath == ""
-                      ? AssetImage("assets/images/profile1.webp")
-                      : FileImage(File(imagePath)) as ImageProvider,
                 ),
                 title: "Unknown".text.size(20).bold.make().py8(),
                 subtitle: "Slepping".text.size(14).bold.make(),
